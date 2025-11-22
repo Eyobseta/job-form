@@ -1,0 +1,155 @@
+:root {
+
+  /* 🎨 Color System */
+  --color-primary: #3ead95;        /* Main accent color for buttons, links, highlights */
+  --color-primary-light: #88ccc1;  /* Lighter version of primary for hover states or subtle accents */
+  --color-secondary: #3069e6;      /* Secondary accent color for secondary buttons, links, icons */
+  --color-danger: #ef4444;         /* Error or destructive action color */
+  --color-text: #1f2937;           /* Main text color for body, headings, and labels */
+  --color-text-light: #6b7280;     /* Secondary or muted text, placeholders, hints */
+  --color-bg: #f9fafb;             /* Main background color for the page or container */
+  --color-bg-alt: #d3d0d0;         /* Alternate background for cards, form sections, or secondary containers */
+
+  /* ✒️ Typography */
+  --font-main: 'Inter', sans-serif; /* Main font family */
+  --font-size-base: 16px;           /* Base font size for body text */
+  --font-size-sm: 14px;             /* Small text for captions, helper text, or secondary elements */
+  --font-size-lg: 20px;             /* Large text for headings or prominent content */
+
+  /* 📦 Spacing System */
+  --space-xs: 4px;   /* Extra small spacing for tight gaps or minor padding/margin */
+  --space-sm: 8px;   /* Small spacing for compact spacing between elements */
+  --space-md: 16px;  /* Medium spacing, standard padding/margin */
+  --space-lg: 32px;  /* Large spacing for sections or significant separation */
+  --space-xl: 48px;  /* Extra large spacing for major section separation */
+
+  /* 🔳 Border Radius */
+  --radius-sm: 4px;   /* Small rounded corners, e.g., inputs */
+  --radius-md: 8px;   /* Medium rounded corners, standard for buttons/cards */
+  --radius-lg: 16px;  /* Large rounded corners, used for containers/highlights */
+
+  /* 🕶 Shadows */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);   /* Subtle shadow for small elements/inputs */
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);   /* Moderate shadow for cards, modals, or popups */
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.15); /* Strong shadow for prominent overlays/hero sections */
+
+  --form-width: 600px;                  
+  --form-padding: 24px;                
+  --form-border: 1px solid var(--color-bg-alt); 
+  --form-gap: 16px; 
+
+  /* 🔘 Button Variables */
+  --btn-height: 36px;      /* Default button height for consistency */
+  --btn-padding: 0 10px;   /* Horizontal padding inside buttons for clickable area */
+  --btn-radius: 8px;       /* Border radius for buttons */
+}
+
+
+
+
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-bg);
+}
+.form-container{
+    max-width: var(--form-width);
+    padding: var(--form-padding);
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--shadow-sm);
+    background-color: var(--color-primary-light);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: #1f3452 0.35rem solid;
+}
+
+.form-step{ 
+    max-width: var(--form-width);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    gap: 2rem;
+    text-align: center;
+}
+#form-description h1{
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-lg);
+    font-weight: bold;
+    color: #0817f0;
+}
+#form-description p{
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    font-weight: bold;
+}
+.form-step button{
+    background-color: var(--color-primary);
+    padding: var(--btn-padding);
+    border-radius: var(--btn-radius);
+    color: #f9fafb;
+    width: 5rem;
+    height: var(--btn-height);
+    font-size: var(--font-size-base);
+    box-shadow: var(--shadow-md);
+}
+#form-description button:hover{
+    background-color: var(--color-secondary);
+}
+#step-1{
+    width: 700px;
+    height: 100%;
+}
+#step-1 .wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    gap: 1rem;
+    font-weight: bold;
+}
+
+#step-1 .wrapper input{
+   width: 40%;
+   padding: 0.3rem 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    position: relative;
+    right: 2rem;
+    text-transform: capitalize;
+}
+#step-1 .wrapper #email{
+    text-transform: none;
+}
+#step-1 .wrapper label{
+    font-size: 1.2rem;
+    display: block;
+    width: 60%;
+    text-align: left;
+     padding: 0.3rem 0.5rem;
+     position: relative;
+     left: 2rem;
+     text-transform: capitalize;
+}
+.buttonContainer{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0rem 5rem;
+}
+
