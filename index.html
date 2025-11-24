@@ -4,21 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My-Form</title>
+
     <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Correct Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+
+    <!-- Correct Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
 </head>
 <body>
-  <form class="form-container">
-     <!-- form description -->
-    <section class="form-step active" id="form-description">
-            <h1>Welcome! Let’s Start Your Project</h1>
-            <p>Thank you for choosing to work with me. I’m excited to learn about your project and build something amazing for you.</p>
-            <p>This form will help me understand your goals, your style, and the features you need.
-            It takes about 10–15 minutes, and the more details you provide, the better I can deliver exactly what you want.</p>
-          <button id="start-btn" class="buttons">Start</button>
-    </section>
-  </form>
+      <form id="myForm">
+              <div class="swiper">
+                      <div class="swiper-wrapper">
+                          <div class="swiper-slide">
+                              <h1>This helps me to communicate with and my clients and to be freinds ,to make strong interactoin with  my customer.</h1>
+                               
+                         </div>
+                         <div class="swiper-slide">
+                               <div class="fullName">
+                                     <h2>Full Name</h2>
+                                     <input type="text" placeholder="Name">
+                                </div>
+                                <div class="email">
+                                     <h2>E-mail</h2>
+                                     <input type="email" placeholder="Email">
+                                </div>                           
+                                <div class="companeyName">
+                                     <h2>Companey Name</h2>
+                                     <input type="text" placeholder="Ride">              
+                                </div>
+                                <div class="country">
+                                       <h2>country</h2>
+                                     <input type="text" placeholder="Canada">
+                                </div>       
+                         </div>
+                         <div class="swiper-slide" id="step-2">
+                              <h2>What type of website do you need? (required)</h2> 
+                                <section id="section1">
+                                       <label for="business"> <input type="checkbox" id="business">  Business Website </label>                                                
+                                       <label for="organization"> <input type="checkbox" id="organization">    organization Website</label>                           
+                                      <label for="nonp-org"><input type="checkbox" id="nonp-org">  Non-Profit Organization Website </label>
+                                      <label for="e-commerce"> <input type="checkbox" id="e-commerce">   E-commerce Website</label>
+                                </section>
+                                <section id="section2">
+                                        <label for="portfolio"><input type="checkbox" id="portfolio">   Personal Portfolio Website</label>
+                                        <label for="landing"><input type="checkbox" id="landing">  Landing Page</label>                           
+                                        <label for="blog"><input type="checkbox" id="blog"> Blog/Magazine</label>                            
+                                        <label for="saas" type="text" id="other"> <input type="checkbox" id="saas"> Saas/Web Application </label>
+                                </section>     
+                                <section id="section3">
+                                     <input type="text" id="other" placeholder="Others...">
+                                </section>                        
+                        </div>
+                        <div class="swiper-slide">
+                              
+                        </div>
+                        <div class="swiper-slide">
+                                
+                        </div>
+                        <div class="swiper-slide">
+                                
+                        </div>
+                        <div class="swiper-slide">
+                                
+                        </div>
+                        </div>
 
-  <script src="/js/app.js"></script>
+                    <!-- Custom buttons -->
+                    <div class="buttons">
+                            <button type="button" id="prevBtn">Back</button>
+                            <button type="button" id="nextBtn">Next</button>
+                            <button type="submit" id="submitBtn" style="display:none;">Submit</button>
+                    </div>
+               </div>
+       </form>
+
+  <script src="js/app.js"></script>
 </body>
-
 </html>
