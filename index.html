@@ -3,83 +3,860 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My-Form</title>
-
-    <link rel="stylesheet" href="/css/style.css">
-
-    <!-- Correct Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
-
-    <!-- Correct Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+    <title>Project Request Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-      <form id="myForm">
-              <div class="swiper">
-                      <div class="swiper-wrapper">
-                          <div class="swiper-slide">
-                              <h1>This helps me to communicate with and my clients and to be freinds ,to make strong interactoin with  my customer.</h1>
-                               
-                         </div>
-                         <div class="swiper-slide">
-                               <div class="fullName">
-                                     <h2>Full Name</h2>
-                                     <input type="text" placeholder="Name">
-                                </div>
-                                <div class="email">
-                                     <h2>E-mail</h2>
-                                     <input type="email" placeholder="Email">
-                                </div>                           
-                                <div class="companeyName">
-                                     <h2>Companey Name</h2>
-                                     <input type="text" placeholder="Ride">              
-                                </div>
-                                <div class="country">
-                                       <h2>country</h2>
-                                     <input type="text" placeholder="Canada">
-                                </div>       
-                         </div>
-                         <div class="swiper-slide" id="step-2">
-                              <h2>What type of website do you need? (required)</h2> 
-                                <section id="section1">
-                                       <label for="business"> <input type="checkbox" id="business">  Business Website </label>                                                
-                                       <label for="organization"> <input type="checkbox" id="organization">    organization Website</label>                           
-                                      <label for="nonp-org"><input type="checkbox" id="nonp-org">  Non-Profit Organization Website </label>
-                                      <label for="e-commerce"> <input type="checkbox" id="e-commerce">   E-commerce Website</label>
-                                </section>
-                                <section id="section2">
-                                        <label for="portfolio"><input type="checkbox" id="portfolio">   Personal Portfolio Website</label>
-                                        <label for="landing"><input type="checkbox" id="landing">  Landing Page</label>                           
-                                        <label for="blog"><input type="checkbox" id="blog"> Blog/Magazine</label>                            
-                                        <label for="saas" type="text" id="other"> <input type="checkbox" id="saas"> Saas/Web Application </label>
-                                </section>     
-                                <section id="section3">
-                                     <input type="text" id="other" placeholder="Others...">
-                                </section>                        
-                        </div>
-                        <div class="swiper-slide">
-                              
-                        </div>
-                        <div class="swiper-slide">
-                                
-                        </div>
-                        <div class="swiper-slide">
-                                
-                        </div>
-                        <div class="swiper-slide">
-                                
-                        </div>
-                        </div>
-
-                    <!-- Custom buttons -->
-                    <div class="buttons">
-                            <button type="button" id="prevBtn">Back</button>
-                            <button type="button" id="nextBtn">Next</button>
-                            <button type="submit" id="submitBtn" style="display:none;">Submit</button>
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" id="loadingSpinner">
+        <div class="spinner"></div>
+        <div class="loading-text" id="loadingText">Submitting your form...</div>
+    </div>
+    
+    <!-- Toast Notification Container -->
+    <div id="toastContainer"></div>
+    
+    <div class="form-container">
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div class="progress-step completed" data-step="0">1</div>
+            <div class="progress-step active" data-step="1">2</div>
+            <div class="progress-step" data-step="2">3</div>
+            <div class="progress-step" data-step="3">4</div>
+            <div class="progress-step" data-step="4">5</div>
+            <div class="progress-step" data-step="5">6</div>
+            <div class="progress-step" data-step="6">7</div>
+            <div class="progress-step" data-step="7">8</div>
+            <div class="progress-step" data-step="8">9</div>
+            <div class="progress-step" data-step="9">10</div>
+            <div class="progress-step" data-step="10">11</div>
+            <div class="progress-step" data-step="11">12</div>
+        </div>
+        
+        <!-- Form Steps -->
+        <form id="projectForm" action="https://formspree.io/f/xnnkeqdo" method="POST">
+            <!-- Step 0: Welcome Screen -->
+            <div class="form-step active" data-step="0">
+                <h1>Welcome! Let's Start Your Project</h1>
+                <p class="description">
+                    Thank you for choosing to work with me. I'm excited to learn about your project and build something amazing for you.
+                    This form will help me understand your goals, your style, and the features you need.
+                    It takes about 10–15 minutes, and the more details you provide, the better I can deliver exactly what you want.
+                </p>
+                <div class="form-navigation">
+                    <div></div>
+                    <button type="button" class="btn next-btn">
+                        <i class="fas fa-rocket"></i> Start the Form
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Step 1: Basic Client Information -->
+            <div class="form-step" data-step="1">
+                <h2>Client Details</h2>
+                <p class="description">Please provide your contact information so I can get in touch with you about your project.</p>
+                
+                <div class="form-group">
+                    <label for="fullName" class="required">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                    <div class="error-message" id="fullNameError"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" class="required">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                    <div class="error-message" id="emailError"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="company">Company / Organization</label>
+                    <input type="text" id="company" name="company">
+                </div>
+                
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <div class="country-search-wrapper">
+                        <input type="text" id="countrySearch" placeholder="Type to search countries...">
+                        <div class="country-search-results" id="countryResults"></div>
                     </div>
-               </div>
-       </form>
+                    <select id="country" name="country" style="display: none;">
+                        <option value="">Select your country</option>
+                        <option value="AF">Afghanistan</option>
+                        <option value="AL">Albania</option>
+                        <option value="DZ">Algeria</option>
+                        <option value="AS">American Samoa</option>
+                        <option value="AD">Andorra</option>
+                        <option value="AO">Angola</option>
+                        <option value="AI">Anguilla</option>
+                        <option value="AQ">Antarctica</option>
+                        <option value="AG">Antigua and Barbuda</option>
+                        <option value="AR">Argentina</option>
+                        <option value="AM">Armenia</option>
+                        <option value="AW">Aruba</option>
+                        <option value="AU">Australia</option>
+                        <option value="AT">Austria</option>
+                        <option value="AZ">Azerbaijan</option>
+                        <option value="BS">Bahamas</option>
+                        <option value="BH">Bahrain</option>
+                        <option value="BD">Bangladesh</option>
+                        <option value="BB">Barbados</option>
+                        <option value="BY">Belarus</option>
+                        <option value="BE">Belgium</option>
+                        <option value="BZ">Belize</option>
+                        <option value="BJ">Benin</option>
+                        <option value="BM">Bermuda</option>
+                        <option value="BT">Bhutan</option>
+                        <option value="BO">Bolivia</option>
+                        <option value="BA">Bosnia and Herzegovina</option>
+                        <option value="BW">Botswana</option>
+                        <option value="BR">Brazil</option>
+                        <option value="IO">British Indian Ocean Territory</option>
+                        <option value="VG">British Virgin Islands</option>
+                        <option value="BN">Brunei</option>
+                        <option value="BG">Bulgaria</option>
+                        <option value="BF">Burkina Faso</option>
+                        <option value="BI">Burundi</option>
+                        <option value="KH">Cambodia</option>
+                        <option value="CM">Cameroon</option>
+                        <option value="CA">Canada</option>
+                        <option value="CV">Cape Verde</option>
+                        <option value="KY">Cayman Islands</option>
+                        <option value="CF">Central African Republic</option>
+                        <option value="TD">Chad</option>
+                        <option value="CL">Chile</option>
+                        <option value="CN">China</option>
+                        <option value="CX">Christmas Island</option>
+                        <option value="CC">Cocos Islands</option>
+                        <option value="CO">Colombia</option>
+                        <option value="KM">Comoros</option>
+                        <option value="CK">Cook Islands</option>
+                        <option value="CR">Costa Rica</option>
+                        <option value="HR">Croatia</option>
+                        <option value="CU">Cuba</option>
+                        <option value="CW">Curacao</option>
+                        <option value="CY">Cyprus</option>
+                        <option value="CZ">Czech Republic</option>
+                        <option value="CD">Democratic Republic of the Congo</option>
+                        <option value="DK">Denmark</option>
+                        <option value="DJ">Djibouti</option>
+                        <option value="DM">Dominica</option>
+                        <option value="DO">Dominican Republic</option>
+                        <option value="TL">East Timor</option>
+                        <option value="EC">Ecuador</option>
+                        <option value="EG">Egypt</option>
+                        <option value="SV">El Salvador</option>
+                        <option value="GQ">Equatorial Guinea</option>
+                        <option value="ER">Eritrea</option>
+                        <option value="EE">Estonia</option>
+                        <option value="ET">Ethiopia</option>
+                        <option value="FK">Falkland Islands</option>
+                        <option value="FO">Faroe Islands</option>
+                        <option value="FJ">Fiji</option>
+                        <option value="FI">Finland</option>
+                        <option value="FR">France</option>
+                        <option value="PF">French Polynesia</option>
+                        <option value="GA">Gabon</option>
+                        <option value="GM">Gambia</option>
+                        <option value="GE">Georgia</option>
+                        <option value="DE">Germany</option>
+                        <option value="GH">Ghana</option>
+                        <option value="GI">Gibraltar</option>
+                        <option value="GR">Greece</option>
+                        <option value="GL">Greenland</option>
+                        <option value="GD">Grenada</option>
+                        <option value="GU">Guam</option>
+                        <option value="GT">Guatemala</option>
+                        <option value="GG">Guernsey</option>
+                        <option value="GN">Guinea</option>
+                        <option value="GW">Guinea-Bissau</option>
+                        <option value="GY">Guyana</option>
+                        <option value="HT">Haiti</option>
+                        <option value="HN">Honduras</option>
+                        <option value="HK">Hong Kong</option>
+                        <option value="HU">Hungary</option>
+                        <option value="IS">Iceland</option>
+                        <option value="IN">India</option>
+                        <option value="ID">Indonesia</option>
+                        <option value="IR">Iran</option>
+                        <option value="IQ">Iraq</option>
+                        <option value="IE">Ireland</option>
+                        <option value="IM">Isle of Man</option>
+                        <option value="IL">Israel</option>
+                        <option value="IT">Italy</option>
+                        <option value="CI">Ivory Coast</option>
+                        <option value="JM">Jamaica</option>
+                        <option value="JP">Japan</option>
+                        <option value="JE">Jersey</option>
+                        <option value="JO">Jordan</option>
+                        <option value="KZ">Kazakhstan</option>
+                        <option value="KE">Kenya</option>
+                        <option value="KI">Kiribati</option>
+                        <option value="XK">Kosovo</option>
+                        <option value="KW">Kuwait</option>
+                        <option value="KG">Kyrgyzstan</option>
+                        <option value="LA">Laos</option>
+                        <option value="LV">Latvia</option>
+                        <option value="LB">Lebanon</option>
+                        <option value="LS">Lesotho</option>
+                        <option value="LR">Liberia</option>
+                        <option value="LY">Libya</option>
+                        <option value="LI">Liechtenstein</option>
+                        <option value="LT">Lithuania</option>
+                        <option value="LU">Luxembourg</option>
+                        <option value="MO">Macao</option>
+                        <option value="MK">Macedonia</option>
+                        <option value="MG">Madagascar</option>
+                        <option value="MW">Malawi</option>
+                        <option value="MY">Malaysia</option>
+                        <option value="MV">Maldives</option>
+                        <option value="ML">Mali</option>
+                        <option value="MT">Malta</option>
+                        <option value="MH">Marshall Islands</option>
+                        <option value="MR">Mauritania</option>
+                        <option value="MU">Mauritius</option>
+                        <option value="YT">Mayotte</option>
+                        <option value="MX">Mexico</option>
+                        <option value="FM">Micronesia</option>
+                        <option value="MD">Moldova</option>
+                        <option value="MC">Monaco</option>
+                        <option value="MN">Mongolia</option>
+                        <option value="ME">Montenegro</option>
+                        <option value="MS">Montserrat</option>
+                        <option value="MA">Morocco</option>
+                        <option value="MZ">Mozambique</option>
+                        <option value="MM">Myanmar</option>
+                        <option value="NA">Namibia</option>
+                        <option value="NR">Nauru</option>
+                        <option value="NP">Nepal</option>
+                        <option value="NL">Netherlands</option>
+                        <option value="AN">Netherlands Antilles</option>
+                        <option value="NC">New Caledonia</option>
+                        <option value="NZ">New Zealand</option>
+                        <option value="NI">Nicaragua</option>
+                        <option value="NE">Niger</option>
+                        <option value="NG">Nigeria</option>
+                        <option value="NU">Niue</option>
+                        <option value="NF">Norfolk Island</option>
+                        <option value="KP">North Korea</option>
+                        <option value="MP">Northern Mariana Islands</option>
+                        <option value="NO">Norway</option>
+                        <option value="OM">Oman</option>
+                        <option value="PK">Pakistan</option>
+                        <option value="PW">Palau</option>
+                        <option value="PS">Palestinian Territory</option>
+                        <option value="PA">Panama</option>
+                        <option value="PG">Papua New Guinea</option>
+                        <option value="PY">Paraguay</option>
+                        <option value="PE">Peru</option>
+                        <option value="PH">Philippines</option>
+                        <option value="PN">Pitcairn</option>
+                        <option value="PL">Poland</option>
+                        <option value="PT">Portugal</option>
+                        <option value="PR">Puerto Rico</option>
+                        <option value="QA">Qatar</option>
+                        <option value="CG">Republic of the Congo</option>
+                        <option value="RE">Reunion</option>
+                        <option value="RO">Romania</option>
+                        <option value="RU">Russia</option>
+                        <option value="RW">Rwanda</option>
+                        <option value="BL">Saint Barthelemy</option>
+                        <option value="SH">Saint Helena</option>
+                        <option value="KN">Saint Kitts and Nevis</option>
+                        <option value="LC">Saint Lucia</option>
+                        <option value="MF">Saint Martin</option>
+                        <option value="PM">Saint Pierre and Miquelon</option>
+                        <option value="VC">Saint Vincent and the Grenadines</option>
+                        <option value="WS">Samoa</option>
+                        <option value="SM">San Marino</option>
+                        <option value="ST">Sao Tome and Principe</option>
+                        <option value="SA">Saudi Arabia</option>
+                        <option value="SN">Senegal</option>
+                        <option value="RS">Serbia</option>
+                        <option value="SC">Seychelles</option>
+                        <option value="SL">Sierra Leone</option>
+                        <option value="SG">Singapore</option>
+                        <option value="SX">Sint Maarten</option>
+                        <option value="SK">Slovakia</option>
+                        <option value="SI">Slovenia</option>
+                        <option value="SB">Solomon Islands</option>
+                        <option value="SO">Somalia</option>
+                        <option value="ZA">South Africa</option>
+                        <option value="KR">South Korea</option>
+                        <option value="SS">South Sudan</option>
+                        <option value="ES">Spain</option>
+                        <option value="LK">Sri Lanka</option>
+                        <option value="SD">Sudan</option>
+                        <option value="SR">Suriname</option>
+                        <option value="SJ">Svalbard and Jan Mayen</option>
+                        <option value="SZ">Swaziland</option>
+                        <option value="SE">Sweden</option>
+                        <option value="CH">Switzerland</option>
+                        <option value="SY">Syria</option>
+                        <option value="TW">Taiwan</option>
+                        <option value="TJ">Tajikistan</option>
+                        <option value="TZ">Tanzania</option>
+                        <option value="TH">Thailand</option>
+                        <option value="TG">Togo</option>
+                        <option value="TK">Tokelau</option>
+                        <option value="TO">Tonga</option>
+                        <option value="TT">Trinidad and Tobago</option>
+                        <option value="TN">Tunisia</option>
+                        <option value="TR">Turkey</option>
+                        <option value="TM">Turkmenistan</option>
+                        <option value="TC">Turks and Caicos Islands</option>
+                        <option value="TV">Tuvalu</option>
+                        <option value="VI">U.S. Virgin Islands</option>
+                        <option value="UG">Uganda</option>
+                        <option value="UA">Ukraine</option>
+                        <option value="AE">United Arab Emirates</option>
+                        <option value="GB">United Kingdom</option>
+                        <option value="US">United States</option>
+                        <option value="UY">Uruguay</option>
+                        <option value="UZ">Uzbekistan</option>
+                        <option value="VU">Vanuatu</option>
+                        <option value="VA">Vatican</option>
+                        <option value="VE">Venezuela</option>
+                        <option value="VN">Vietnam</option>
+                        <option value="WF">Wallis and Futuna</option>
+                        <option value="EH">Western Sahara</option>
+                        <option value="YE">Yemen</option>
+                        <option value="ZM">Zambia</option>
+                        <option value="ZW">Zimbabwe</option>
+                    </select>
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn btn-secondary prev-btn">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button type="button" class="btn next-btn">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Step 2: Project Overview -->
+            <div class="form-step" data-step="2">
+                <h2>What Type of Website Do You Need?</h2>
+                <p class="description">Select the type of website that best matches your project.</p>
+                
+                <div class="checkbox-group" id="projectTypeGroup">
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="projectType" value="Business Website">
+                        Business Website
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="projectType" value="Personal Portfolio">
+                        Personal Portfolio
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="projectType" value="Organization Website">
+                        Organization Website
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="projectType" value="Non-Profit Organization">
+                        Non-Profit Organization
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="projectType" value="E-commerce Website">
+                        E-commerce Website
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="projectType" value="Landing Page">
+                        Landing Page
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="projectType" value="Blog / Magazine">
+                        Blog / Magazine
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="projectType" value="SaaS / Web Application">
+                        SaaS / Web Application
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="projectType" value="Other">
+                        Other
+                    </label>
+                </div>
+                <div class="error-message" id="projectTypeError"></div>
+                
+                <div class="form-group" id="otherTypeContainer" style="display: none;">
+                    <label for="otherType">Please specify:</label>
+                    <input type="text" id="otherType" name="otherType">
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn btn-secondary prev-btn">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button type="button" class="btn next-btn">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Step 3: Website Purpose / Goal -->
+            <div class="form-step" data-step="3">
+                <h2>What's the Main Purpose of Your Website?</h2>
+                <p class="description">"When visitors land on your site, what is the main action you want them to take?"</p>
+                
+                <div class="radio-group" id="purposeGroup">
+                    <label class="radio-item">
+                        <input type="radio" name="purpose" value="Get more leads / clients" required>
+                        Get more leads / clients
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="purpose" value="Showcase services">
+                        Showcase services
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="purpose" value="Sell products">
+                        Sell products
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="purpose" value="Let users book appointments">
+                        Let users book appointments
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="purpose" value="Inform / educate visitors">
+                        Inform / educate visitors
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="purpose" value="Build a strong online presence">
+                        Build a strong online presence
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="purpose" value="Collect emails (newsletter)">
+                        Collect emails (newsletter)
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="purpose" value="Drive traffic to a specific page/action">
+                        Drive traffic to a specific page/action
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="purpose" value="Other">
+                        Other
+                    </label>
+                </div>
+                <div class="error-message" id="purposeError"></div>
+                
+                <div class="form-group" id="otherPurposeContainer" style="display: none;">
+                    <label for="otherPurpose">Please specify:</label>
+                    <input type="text" id="otherPurpose" name="otherPurpose">
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn btn-secondary prev-btn">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button type="button" class="btn next-btn">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Step 4: Target Audience -->
+            <div class="form-step" data-step="4">
+                <h2>Who Is Your Target Audience?</h2>
+                <p class="description">Select all that apply (optional but recommended)</p>
+                
+                <div class="checkbox-group" id="audienceGroup">
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="audience" value="Young professionals">
+                        Young professionals
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="audience" value="Students">
+                        Students
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="audience" value="Families">
+                        Families
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="audience" value="Business owners">
+                        Business owners
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="audience" value="General public">
+                        General public
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="audience" value="Tech users">
+                        Tech users
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="audience" value="Donors / supporters">
+                        Donors / supporters
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="audience" value="Other">
+                        Other
+                    </label>
+                </div>
+                
+                <div class="form-group" id="otherAudienceContainer" style="display: none;">
+                    <label for="otherAudience">Please specify:</label>
+                    <input type="text" id="otherAudience" name="otherAudience">
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn btn-secondary prev-btn">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button type="button" class="btn next-btn">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Step 5: Features & Functionalities -->
+            <div class="form-step" data-step="5">
+                <h2>What Features Do You Want Included?</h2>
+                <p class="description">Select all the features you need for your website.</p>
+                
+                <div class="checkbox-group" id="featuresGroup">
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="features" value="Contact form">
+                        Contact form
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="features" value="Blog system">
+                        Blog system
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="features" value="Booking system / calendar">
+                        Booking system / calendar
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="features" value="User authentication (Login/Register)">
+                        User authentication (Login/Register)
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="features" value="Admin dashboard">
+                        Admin dashboard
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="features" value="Payment integration">
+                        Payment integration
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="features" value="Multi-language support">
+                        Multi-language support
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="features" value="Chat/support widget">
+                        Chat/support widget
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="features" value="Newsletter signup">
+                        Newsletter signup
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="features" value="E-commerce (cart + checkout)">
+                        E-commerce (cart + checkout)
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="features" value="Custom API integrations">
+                        Custom API integrations
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="features" value="Other">
+                        Other
+                    </label>
+                </div>
+                <div class="error-message" id="featuresError"></div>
+                
+                <div class="form-group" id="otherFeaturesContainer" style="display: none;">
+                    <label for="otherFeatures">Please specify:</label>
+                    <input type="text" id="otherFeatures" name="otherFeatures">
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn btn-secondary prev-btn">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button type="button" class="btn next-btn">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Step 6: Design Preferences -->
+            <div class="form-step" data-step="6">
+                <h2>Design & Style Preferences</h2>
+                <p class="description">Tell me about your design preferences to create a website that matches your vision.</p>
+                
+                <div class="form-group">
+                    <h3>Website Style (optional)</h3>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="style" value="Modern & Clean">
+                            Modern & Clean
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="style" value="Minimalistic">
+                            Minimalistic
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="style" value="Professional">
+                            Professional
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="style" value="Corporate">
+                            Corporate
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="style" value="Bold & Colorful">
+                            Bold & Colorful
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="style" value="Dark Theme">
+                            Dark Theme
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="style" value="Light Theme">
+                            Light Theme
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="websiteReferences">Websites You Like (optional)</label>
+                    <textarea id="websiteReferences" name="websiteReferences" rows="3" placeholder="Paste links to websites you like as references..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <h3>Branding</h3>
+                    <div style="margin-bottom: 15px;">
+                        <label>Do you have a logo?</label>
+                        <div style="display: flex; gap: 20px; margin-top: 10px;" id="logoGroup">
+                            <label class="radio-item">
+                                <input type="radio" name="hasLogo" value="Yes">
+                                Yes
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="hasLogo" value="No">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label>Do you have brand colors? (Optional)</label>
+                        <div class="color-picker">
+                            <div class="color-option color-1" data-color="#06b6d4"></div>
+                            <div class="color-option color-2" data-color="#10b981"></div>
+                            <div class="color-option color-3" data-color="#3b82f6"></div>
+                            <div class="color-option color-4" data-color="#8b5cf6"></div>
+                            <div class="color-option color-5" data-color="#f59e0b"></div>
+                            <div class="color-option color-6" data-color="#ef4444"></div>
+                        </div>
+                        <input type="hidden" id="brandColors" name="brandColors">
+                        <input type="text" id="customColors" name="customColors" placeholder="Or enter your own color codes (e.g., #FF5733, #33FF57)" style="margin-top: 10px;">
+                    </div>
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn btn-secondary prev-btn">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button type="button" class="btn next-btn">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Step 7: Content Availability -->
+            <div class="form-step" data-step="7">
+                <h2>Do You Already Have Website Content?</h2>
+                
+                <div class="radio-group" id="contentGroup">
+                    <label class="radio-item">
+                        <input type="radio" name="content" value="Yes, I have everything" required>
+                        Yes, I have everything
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="content" value="I have some content">
+                        I have some content
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="content" value="I need help creating content">
+                        I need help creating content
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="content" value="Not sure yet">
+                        Not sure yet
+                    </label>
+                </div>
+                <div class="error-message" id="contentError"></div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn btn-secondary prev-btn">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button type="button" class="btn next-btn">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Step 8: Project Timeline -->
+            <div class="form-step" data-step="8">
+                <h2>Preferred Project Timeline</h2>
+                
+                <div class="radio-group" id="timelineGroup">
+                    <label class="radio-item">
+                        <input type="radio" name="timeline" value="1 week" required>
+                        1 week
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="timeline" value="2–3 weeks">
+                        2–3 weeks
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="timeline" value="1 month">
+                        1 month
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="timeline" value="Flexible">
+                        Flexible
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="timeline" value="Not sure">
+                        Not sure
+                    </label>
+                </div>
+                <div class="error-message" id="timelineError"></div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn btn-secondary prev-btn">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button type="button" class="btn next-btn">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Step 9: Budget Range -->
+            <div class="form-step" data-step="9">
+                <h2>Estimated Budget Range</h2>
+                <p class="description">This helps me understand your expectations and propose the right solution.</p>
+                
+                <div class="radio-group">
+                    <label class="radio-item">
+                        <input type="radio" name="budget" value="$50–$150">
+                        $50–$150
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="budget" value="$150–$300">
+                        $150–$300
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="budget" value="$300–$600">
+                        $300–$600
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="budget" value="$600+">
+                        $600+
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="budget" value="Not sure (needs discussion)">
+                        Not sure (needs discussion)
+                    </label>
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn btn-secondary prev-btn">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button type="button" class="btn next-btn">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Step 10: Additional Information -->
+            <div class="form-step" data-step="10">
+                <h2>Anything Else You Want Me To Know?</h2>
+                <p class="description">Share any extra details about your project, goals, or ideas.</p>
+                
+                <div class="form-group">
+                    <textarea id="additionalInfo" name="additionalInfo" rows="6" placeholder="Write any extra details about your project, goals, or ideas..."></textarea>
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn btn-secondary prev-btn">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button type="button" class="btn next-btn">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Step 11: Consultation Call -->
+            <div class="form-step" data-step="11">
+                <h2>Would You Like a Free 15–20 Minute Call?</h2>
+                
+                <div class="radio-group">
+                    <label class="radio-item">
+                        <input type="radio" name="consultation" value="Yes">
+                        Yes
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="consultation" value="No">
+                        No
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="consultation" value="Maybe later">
+                        Maybe later
+                    </label>
+                </div>
+                
+                <div class="form-group datetime-picker" id="callDateTimeContainer" style="display: none;">
+                    <label for="callDateTime">Preferred Call Date & Time</label>
+                    <input type="datetime-local" id="callDateTime" name="callDateTime">
+                </div>
+                
+                <!-- Submission Status Indicator -->
+                <div class="submission-status hidden" id="submissionStatus">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <span id="statusText">Preparing submission...</span>
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn btn-secondary prev-btn">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button type="button" class="btn" id="submitFormBtn">
+                        <i class="fas fa-paper-plane"></i> Submit Form
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Success Message -->
+            <div class="form-step success-message hidden" id="successMessage">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2>Form Submitted Successfully!</h2>
+                <p class="description">
+                    Thank you <span id="clientName"></span> for submitting your project request. 
+                    I have received your information and will reach out to you soon.
+                </p>
+                <p class="description" style="margin-top: 20px;">
+                    <a href="https://eyobseta.github.io/portfolio/" class="btn">
+                        <i class="fas fa-external-link-alt"></i> Go to Portfolio
+                    </a>
+                </p>
+            </div>
+        </form>
+    </div>
 
-  <script src="js/app.js"></script>
+    
+<script src="js/app.js"></script>
 </body>
 </html>
